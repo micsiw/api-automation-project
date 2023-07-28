@@ -13,6 +13,8 @@ npm install -g newman
 npm install -g newman-reporter-htmlextra
 ```
 
+Clone repository and run tests in CLI:
+
 ```
 git clone git@github.com:micsiw/api-automation-project.git
 cd api-automation-project
