@@ -1,0 +1,12 @@
+{
+  "name": "api-automation-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "newman run collections/automation-exercise.json",
+    "test-report": "newman run collections/automation-exercise.json -r htmlextra --reporter-htmlextra-export ./report/report.html"
+  },
+  "author": "",
+  "license": "ISC"
+}

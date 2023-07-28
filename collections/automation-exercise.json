@@ -1,0 +1,799 @@
+{
+	"info": {
+		"_postman_id": "6e2c6a7e-2df8-4719-a0a1-29cd7e01fcba",
+		"name": "Automation Practice",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28011087"
+	},
+	"item": [
+		{
+			"name": "01 - GET All Products List",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Response code is 200\", function () {",
+							"    pm.expect(jsonData.responseCode).to.be.equal(200);",
+							"});",
+							"",
+							"pm.test(\"Product list is received\", function () {",
+							"    pm.expect(jsonData.products).to.not.be.empty;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}productsList",
+					"host": [
+						"{{baseURL}}productsList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "02 - POST To All Products List",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Response code is 405\", function () {",
+							"    pm.expect(jsonData.responseCode).to.be.equal(405);",
+							"});",
+							"",
+							"pm.test(\"Response message is 'This request method is not supported.'\", function() {",
+							"    pm.expect(jsonData.message).to.be.equal(\"This request method is not supported.\");",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}productsList",
+					"host": [
+						"{{baseURL}}productsList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "03 - GET All Brands List",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Response code is 200\", function () {",
+							"    pm.expect(jsonData.responseCode).to.be.equal(200);",
+							"});",
+							"",
+							"pm.test(\"Brands list is received\", function () {",
+							"    pm.expect(jsonData.brands).to.not.be.empty;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}brandsList",
+					"host": [
+						"{{baseURL}}brandsList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "04 - PUT To All Brands List",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Response code is 405\", function () {",
+							"    pm.expect(jsonData.responseCode).to.be.equal(405);",
+							"});",
+							"",
+							"pm.test(\"Response message is 'This request method is not supported.'\", function() {",
+							"    pm.expect(jsonData.message).to.be.equal(\"This request method is not supported.\");",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseURL}}brandsList",
+					"host": [
+						"{{baseURL}}brandsList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "05 - POST To Search T-shirt Product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Response code is 200\", function () {",
+							"    pm.expect(jsonData.responseCode).to.be.equal(200);",
+							"});",
+							"",
+							"pm.test(\"Query of 'T-shirts' is received\", function () {",
+							"    pm.expect(jsonData.products[0].category.category).to.be.equal(\"Tshirts\");",
+							"    pm.expect(jsonData.products[2].category.category).to.be.equal(\"Tshirts\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "search_product",
+							"value": "tshirt",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseURL}}searchProduct",
+					"host": [
+						"{{baseURL}}searchProduct"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "06 - POST To Search Product without search_product parameter",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Response code is 400\", function () {",
+							"    pm.expect(jsonData.responseCode).to.be.equal(400);",
+							"});",
+							"",
+							"pm.test(\"Response message is 'Bad request, search_product parameter is missing in POST request.'\", function() {",
+							"    pm.expect(jsonData.message).to.be.equal(\"Bad request, search_product parameter is missing in POST request.\");",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "search_product",
+							"value": "tshirt",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseURL}}searchProduct",
+					"host": [
+						"{{baseURL}}searchProduct"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "07 - POST To Verify Login with valid details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Response code is 200\", function () {",
+							"    pm.expect(jsonData.responseCode).to.be.equal(200);",
+							"});",
+							"",
+							"pm.test(\"User exists\", function () {",
+							"    pm.expect(jsonData.message).to.be.equal(\"User exists!\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "testing@testing.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseURL}}verifyLogin",
+					"host": [
+						"{{baseURL}}verifyLogin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "08 - POST To Verify Login without email parameter",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Response code is 400\", function () {",
+							"    pm.expect(jsonData.responseCode).to.be.equal(400);",
+							"});",
+							"",
+							"pm.test(\"Response message is 'Bad request, email or password parameter is missing in POST request.'\", function() {",
+							"    pm.expect(jsonData.message).to.be.equal(\"Bad request, email or password parameter is missing in POST request.\");",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "testing@testing.com",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseURL}}verifyLogin",
+					"host": [
+						"{{baseURL}}verifyLogin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "09 - DELETE To Verify Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Response code is 405\", function () {",
+							"    pm.expect(jsonData.responseCode).to.be.equal(405);",
+							"});",
+							"",
+							"pm.test(\"Response message is 'This request method is not supported.'\", function() {",
+							"    pm.expect(jsonData.message).to.be.equal(\"This request method is not supported.\");",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "testing@testing.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseURL}}verifyLogin",
+					"host": [
+						"{{baseURL}}verifyLogin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "10 - POST To Verify Login with invalid details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Response code is 404\", function () {",
+							"    pm.expect(jsonData.responseCode).to.be.equal(404);",
+							"});",
+							"",
+							"pm.test(\"Response message is 'User not found!'\", function() {",
+							"    pm.expect(jsonData.message).to.be.equal(\"User not found!\");",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "invalid@invalid.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "wrong-password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseURL}}verifyLogin",
+					"host": [
+						"{{baseURL}}verifyLogin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "11 - POST To Create/Register User Account",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Response code is 201\", function () {",
+							"    pm.expect(jsonData.responseCode).to.be.equal(201);",
+							"});",
+							"",
+							"pm.test(\"Response message is 'User created!'\", function() {",
+							"    pm.expect(jsonData.message).to.be.equal(\"User created!\");",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "John Doe",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "johndoe@testing.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text"
+						},
+						{
+							"key": "title",
+							"value": "Mr",
+							"type": "text"
+						},
+						{
+							"key": "birth_date",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "birth_month",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "birth_year",
+							"value": "1990",
+							"type": "text"
+						},
+						{
+							"key": "firstname",
+							"value": "John",
+							"type": "text"
+						},
+						{
+							"key": "lastname",
+							"value": "Doe",
+							"type": "text"
+						},
+						{
+							"key": "company",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "address1",
+							"value": "Some Street",
+							"type": "text"
+						},
+						{
+							"key": "address2",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "country",
+							"value": "USA",
+							"type": "text"
+						},
+						{
+							"key": "zipcode",
+							"value": "34213",
+							"type": "text"
+						},
+						{
+							"key": "state",
+							"value": "Arizona",
+							"type": "text"
+						},
+						{
+							"key": "city",
+							"value": "Some City",
+							"type": "text"
+						},
+						{
+							"key": "mobile_number",
+							"value": "123456789",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseURL}}createAccount",
+					"host": [
+						"{{baseURL}}createAccount"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "13 - PUT METHOD To Update User Account",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Response code is 200\", function () {",
+							"    pm.expect(jsonData.responseCode).to.be.equal(200);",
+							"});",
+							"",
+							"pm.test(\"Response message is 'User updated!'\", function() {",
+							"    pm.expect(jsonData.message).to.be.equal(\"User updated!\");",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "John Doe",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "johndoe@testing.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text"
+						},
+						{
+							"key": "title",
+							"value": "Mr",
+							"type": "text"
+						},
+						{
+							"key": "birth_date",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "birth_month",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "birth_year",
+							"value": "1990",
+							"type": "text"
+						},
+						{
+							"key": "firstname",
+							"value": "John",
+							"type": "text"
+						},
+						{
+							"key": "lastname",
+							"value": "Doe",
+							"type": "text"
+						},
+						{
+							"key": "company",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "address1",
+							"value": "Some Street",
+							"type": "text"
+						},
+						{
+							"key": "address2",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "country",
+							"value": "USA",
+							"type": "text"
+						},
+						{
+							"key": "zipcode",
+							"value": "34213",
+							"type": "text"
+						},
+						{
+							"key": "state",
+							"value": "Texas",
+							"description": "State is changed!",
+							"type": "text"
+						},
+						{
+							"key": "city",
+							"value": "Some Other City",
+							"description": "City is changed!",
+							"type": "text"
+						},
+						{
+							"key": "mobile_number",
+							"value": "123456789",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseURL}}updateAccount",
+					"host": [
+						"{{baseURL}}updateAccount"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "14 - GET user account detail by email",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Response code is 200\", function () {",
+							"    pm.expect(jsonData.responseCode).to.be.equal(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "johndoe@testing.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseURL}}getUserDetailByEmail",
+					"host": [
+						"{{baseURL}}getUserDetailByEmail"
+					]
+				},
+				"description": "This test is supposed to fail."
+			},
+			"response": []
+		},
+		{
+			"name": "12 - DELETE METHOD To Delete User Account",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Response code is 200\", function () {",
+							"    pm.expect(jsonData.responseCode).to.be.equal(200);",
+							"});",
+							"",
+							"pm.test(\"Response message is 'Account deleted!'\", function() {",
+							"    pm.expect(jsonData.message).to.be.equal(\"Account deleted!\");",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "johndoe@testing.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseURL}}deleteAccount",
+					"host": [
+						"{{baseURL}}deleteAccount"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "https://automationexercise.com/api/",
+			"type": "string"
+		}
+	]
+}
